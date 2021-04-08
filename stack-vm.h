@@ -14,7 +14,7 @@ class StackVM
 	// pc ---> addresses 
 	i32 pc = 100;  // program counter
 	i32 sp = 0;  // stack pointer
-	std::vector<132> memory;
+	std::vector<i32> memory;
 	i32 typ = 0;
 	i32 dat = 0;
 	i32 running = 1; // if vm still  working
