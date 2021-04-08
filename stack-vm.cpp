@@ -66,8 +66,8 @@ void StackVM::doPrimitive()
 			 *	|_______|
 			 * */
 
-			memory[sp] = memory[sp - 1] + memory[sp];
-			
+			memory[sp - 1] = memory[sp - 1] + memory[sp];
+			sp--;			
 			break;
     					
 	}						
@@ -91,5 +91,7 @@ void StackVM::loadProgram(std::vector<i32> prog)
 		for(i32 i=0;i<prog.size();i++)
 		{
 			memory[pc + i] = prog[i];
+			std::cout<<"SHOWING MEMORY: "<<std::endl;
+			std::cout<<prog[i]<<std::endl;
 		}
 }
