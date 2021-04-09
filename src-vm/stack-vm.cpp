@@ -110,7 +110,6 @@ void StackVM::doPrimitive()
 			sp--;
 			break;
 	}						
-	std::cout<<"TOS: "<<memory[sp]<<std::endl;
 }
 
 
@@ -124,8 +123,9 @@ void StackVM::run()
 		fetch();
 		decode();
 		execute();
+		std::cout<<"TOS: "<<memory[sp]<<std::endl;
 	}
-		std::	cout<<memory[sp];
+//		std::	cout<<memory[sp];
 }
 
 void StackVM::loadProgram(std::vector<i32> prog)
