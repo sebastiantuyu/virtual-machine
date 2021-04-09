@@ -1,22 +1,28 @@
 #include "stack-vm.h"
 #include <bitset>
+#include <iostream>
+#include <fstream>
 
-int main()
+using namespace std;
+
+int main(int argc, char *argv[])
 {
-	StackVM vm;
-std::vector<i32> prog{
-					3, 4, 0x40000001, // <--- ADD 3, 4
-					5, 4, 0x40000002, // <--- SUB 2, 4
-					8, 4, 0x40000003,	// <--- MUL 8, 4 
-					0x40000000}; 			// <--- HALT
-	
-	//	0x40000001 -----> ADD
-	//	0x40000000 -----> HALT
-	std::bitset<32> b1(0x40000001);
-	std::bitset<32> b2(0x40000000);
+	if(argc < 2){
+		cout<<"USAGE: "<< argv[0] <<" <filename> "<<endl;
+		return 0;
+	}
 
-	std::cout<<"B1: "<<b1<<std::endl;
-	std::cout<<"B2: "<<b2<<std::endl<<std::endl;
+	ifstream r(argv[1], ios::binary);
+	i32 i;
+	vector<i32> prog;
+
+	while(r.read((char*)&i, sizeof(i)))
+	{
+		prog.push_back(i);
+	}
+
+
+	StackVM vm;
 	//Initialice ! 
 	vm.loadProgram(prog);
 	vm.run();

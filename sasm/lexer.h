@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-typedef int8_t byte;
-typedef std::vector<string> strings; 
+typedef uint8_t byte;
+typedef std::vector<std::string> strings; 
 
 enum State : byte 
 {
@@ -16,16 +16,17 @@ enum State : byte
 	DUMP,
 	COMMENT,
 	END
-}
+};
 
 class Lexer 
 {
-	bool my_isspace(char c);
-	bool isspecial(char c);
-	bool isgroup(char c);
-	char end_char,beg_char;
-	public:
-		strings existd(std::string s);
+		bool my_isspace(char c);
+		bool isspecial(char c);
+		bool isgroup(char c);
+		char end_char,beg_char;
+
+		public:
+			strings lex(std::string s);
 };
 
 #endif
