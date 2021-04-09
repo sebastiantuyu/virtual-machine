@@ -11,17 +11,16 @@ strings Lexer::lex(std::string s)
 		int done = 0;
 		int len = s.length(); 
 		int balance = 0;
-		std::cout<<"THE SIZE iS: "<<len<<std::endl;
+		
+
 		while(i<len)
 		{
-		std::cout<<"CHAR POS: "<<s[i]<<std::endl;
 		switch(state)
 		{
 
 
 			// Cases for the state machine
 			case START:
-				std::cout<<"START"<<std::endl;
 							if(my_isspace(s[i]))
 							{
 											state = SKIP;
@@ -42,7 +41,6 @@ strings Lexer::lex(std::string s)
 									state = COMMENT;
 								}
 								else{ 
-									std::cout<<"END"<<std::endl;
 									state = READCHAR;
 								}
 
@@ -52,7 +50,6 @@ strings Lexer::lex(std::string s)
 
 
 			case READCHAR:
-				std::cout<<"READCHAR"<<s[i]<<std::endl;
 					if(my_isspace(s[i])){
 						state = DUMP;		}
 					
@@ -87,23 +84,19 @@ strings Lexer::lex(std::string s)
 					else if (s[i] == '/' && s[i+1] == '/')
 					{
 
-						std::cout<<"***** MVKV"<<std::endl;
 						i +=2;
 						state = COMMENT;
 					} else {
-						std::cout<<"***** MVKV"<<std::endl;
 						lexeme[j] = s[i];
 						j++;
 						i++;
 					}
 
 		
-					std::cout<<"ENDREADCHAR"<<std::endl;
 				break;
 
 			case READBLOCK:
 
-				std::cout<<"READBLOCK"<<std::endl;
 				
 				if(s[i] == beg_char && s[i] != '"')
 				{
@@ -135,7 +128,6 @@ strings Lexer::lex(std::string s)
 				break;
 
 			case SKIP:
-					std::cout<<"SKIP"<<std::endl;
 				if (my_isspace(s[i]))
 				{
 					i++;
@@ -146,7 +138,6 @@ strings Lexer::lex(std::string s)
 				break;
 
 			case DUMP:
-					std::cout<<"DUMP"<<std::endl;
 				if(j > 0){
 					lexeme[j] = 0;
 					strlst.push_back(lexeme);
@@ -168,19 +159,16 @@ strings Lexer::lex(std::string s)
 
 
 			case END:
-				std::cout<<"END"<<std::endl;
 				i = len;
 				break;
+		}
 		}
 
 						if(j>0){
 						lexeme[j] = 0;
 						strlst.push_back(lexeme);
-						}
-						
-		}
-
-
+						}			
+		
 		return strlst;
 }
 
@@ -190,7 +178,6 @@ strings Lexer::lex(std::string s)
 bool Lexer::my_isspace(char c)
 {
 
-	std::cout<<"MYSPCE"<<std::endl;
 	switch(c)
 	{
 		case '\n':
@@ -210,7 +197,6 @@ bool Lexer::my_isspace(char c)
 bool Lexer::isgroup(char c)
 {
 
-	std::cout<<"ISGROUP"<<std::endl;
 	beg_char = c;
 	switch(c)
 	{
@@ -230,7 +216,6 @@ bool Lexer::isgroup(char c)
 //check if is a special char
 bool Lexer::isspecial(char c)
 {
-		std::cout<<"SPECIAL"<<std::endl;
 		switch(c)
 		{
 			case '[':

@@ -32,14 +32,12 @@ int main(int argc,char *argv[])
 
 	while(getline(infile,line))
 	{
-		contents += line + '\n';
+		contents += line + "\n";
 	}
-	cout<<"CONTENT: "<<contents<<endl;
 	infile.close();
-	
+
 	Lexer lexer;
 	strings lexenes = lexer.lex(contents);
-//	cout<<"LEXENES"<<lexenes.begin()<<endl;	
 	vector<i32> instructions = compileToInstructions(lexenes);
 	
 	ofstream ofile;
@@ -55,18 +53,18 @@ int main(int argc,char *argv[])
 
 vector<i32> compileToInstructions(strings s)
 {
-	cout<<"Instructions for "<<endl;
+//	i32 i=0;
+	//cout<<"Instructions for "<<s[i]<<endl;
 	vector<i32> instructions;
+	cout<<"SIZE OF STRING COMPILING: "<<s.size()<<endl;
 	for(i32 i = 0; i < s.size(); i++)
 	{
 		cout<<s[i]<<endl;
 		if(isInteger(s[i]))
-		{
-			cout<<"IS INTG: "<<s[i]<<endl;
-			instructions.push_back(stoi(s[i]));
-		} else {
+		{			instructions.push_back(stoi(s[i]));}
+
+		else {
 						i32 instruction = mapToNumber(s[i]);
-						cout<<"INSTRUCTION: "<<instruction<<endl;
 							if(instruction != -1){
 										instructions.push_back(instruction);
 													}
@@ -75,8 +73,13 @@ vector<i32> compileToInstructions(strings s)
 									}
 						}
 			}
+
+		//cout<<"ADD HALT"<<endl;
 		instructions.push_back(0x40000000); // add halt at the end
 		return instructions;
+
+
+
 }
 
 

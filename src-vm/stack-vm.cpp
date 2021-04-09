@@ -14,13 +14,16 @@ i32 StackVM::getType(i32 instruction)
 	
 	i32 type = 0xc0000000;
 	
-	std::bitset<32> y(instruction);
-	type = (type & instruction);
-	std::bitset<32> z(type);
-	type = type >> 30;
+	//std::bitset<32> y(instruction);
+	type = (type & instruction) >> 30;
 
 
+	/*	std::bitset<32> z(type);
+	type = type >> 30;*/
 
+
+/*
+ * UNCOMMENT SECTION FOR DEBUG OPERATIONS
 	std::cout<<std::endl<<"***************************"<<std::endl;
 
 	std::cout<<"INSTRUCTION: "<<y<<std::endl;
@@ -28,7 +31,7 @@ i32 StackVM::getType(i32 instruction)
 	std::cout<<"TYPE IS:     "<<type<<std::endl;
 	
 	std::cout<<std::endl<<"***************************"<<std::endl;
-	
+*/
 	return type; 
 }
 
@@ -74,12 +77,12 @@ void StackVM::doPrimitive()
 			break;
  
 		case 1:		// ADD
-			std::cout<<"ADD "<<memory[sp -1]<<" "<< memory[sp] <<std::endl;
+			std::cout<<"ADD "<<memory[sp]<<" "<< memory[sp - 1] <<std::endl;
 
 			// Get the 2 first in stack, pop and then added into the first
 			/*  |   2   |           |   5   |
 			 *	|_______|           |_______|
-			 *	|   3   |   ====>   |  ...  |  
+			 *	|   3   |   ====>   |  ...  |   
 			 *  |_______|           |_______|
 			 *  |  ...  |            
 			 *	|_______|
@@ -90,20 +93,24 @@ void StackVM::doPrimitive()
 			break;
 
 		case 2: // SUB
+			std::cout<<"SUB "<<memory[sp]<<" "<< memory[sp - 1] <<std::endl;	
 			memory[sp - 1] = memory[sp-1] - memory[sp];
 			sp--;
 			break;
 
     case 3: // multiplication
+		  std::cout<<"MUL "<<memory[sp]<<" "<< memory[sp - 1] <<std::endl;
 			memory[sp - 1] = memory[sp-1] * memory[sp];
 			sp--;
 			break;
 		
 		case 4: // division
+			std::cout<<"DIV "<<memory[sp]<<" "<< memory[sp - 1] <<std::endl;
 			memory[sp - 1] = memory[sp - 1] / memory[sp];
 			sp--;
 			break;
 	}						
+	std::cout<<"TOS: "<<memory[sp]<<std::endl;
 }
 
 
