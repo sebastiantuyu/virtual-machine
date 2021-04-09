@@ -15,3 +15,18 @@
 		3 => undefined
 ```
 
+### Bitwise operations
+
+>  A bitwise depends are operations at bit-level
+>  is maded for creating operations only with bits and bytes
+
+#### Main operators
+
+- < <  Left shift 
+- > >  Right shift 
+- &		 AND operator
+- +		 PLUS operator
+- |    OR operator
+
+
+
